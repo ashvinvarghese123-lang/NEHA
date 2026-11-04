@@ -1,33 +1,149 @@
-import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { useReducedMotion } from 'framer-motion'
 import { backgroundVideos } from '../data/memories'
 
-// Every video you drop into src/assets/videos is used automatically.
+// Automatically load all background videos
 const found = import.meta.glob('../assets/videos/*.{mp4,webm,mov}', { eager: true, query: '?url', import: 'default' })
 const videos = [...Object.values(found), ...backgroundVideos]
 
 export default function BackgroundVideo() {
-  const [i, setI] = useState(0)
   const reduce = useReducedMotion()
+  const [deck, setDeck] = useState(0) // 0 means Deck A is visible, 1 means Deck B is visible
+  const [videoA, setVideoA] = useState(videos[0] || '')
+  const [videoB, setVideoB] = useState(videos[1] || videos[0] || '')
+  const nextIndexRef = useRef(1)
+
+  const videoRefA1 = useRef(null)
+  const videoRefA2 = useRef(null)
+  const videoRefB1 = useRef(null)
+  const videoRefB2 = useRef(null)
+
   const on = videos.length > 0 && !reduce
+
   useEffect(() => {
     if (!on || videos.length < 2) return
-    const t = setInterval(() => setI(n => (n + 1) % videos.length), 15000)
-    return () => clearInterval(t)
+
+    const interval = setInterval(() => {
+      const nextIdx = (nextIndexRef.current + 1) % videos.length
+      nextIndexRef.current = nextIdx
+      const nextSrc = videos[nextIdx]
+
+      setDeck((currentDeck) => {
+        if (currentDeck === 0) {
+          // Crossfade to Deck B
+          setVideoB(nextSrc)
+          // Play deck B videos
+          videoRefB1.current?.play().catch(() => {})
+          videoRefB2.current?.play().catch(() => {})
+          return 1
+        } else {
+          // Crossfade to Deck A
+          setVideoA(nextSrc)
+          // Play deck A videos
+          videoRefA1.current?.play().catch(() => {})
+          videoRefA2.current?.play().catch(() => {})
+          return 0
+        }
+      })
+    }, 12000) // Crossfade every 12 seconds
+
+    return () => clearInterval(interval)
   }, [on])
+
+  if (!on) {
+    return (
+      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-ivory via-cream to-ivory" aria-hidden />
+    )
+  }
+
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-b from-ivory via-cream to-ivory" aria-hidden>
-      <AnimatePresence>
-        {on && (
-          <motion.video key={videos[i]} src={videos[i]} autoPlay muted loop playsInline disablePictureInPicture preload="auto"
-            webkit-playsinline="true"
-            initial={{ opacity: 0 }} animate={{ opacity: 0.75 }} exit={{ opacity: 0 }} transition={{ duration: 2.5 }}
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ filter: 'blur(1px) sepia(.15) saturate(1.05)' }} />
+      {/* DECK A */}
+      <div
+        className="absolute inset-0 transition-opacity duration-[2500ms] ease-in-out"
+        style={{ opacity: deck === 0 ? 1 : 0 }}
+      >
+        {videoA && (
+          <>
+            {/* Ambient background glow matching natural video tones */}
+            <video
+              ref={videoRefA1}
+              src={videoA}
+              autoPlay
+              muted
+              loop
+              playsInline
+              webkit-playsinline="true"
+              preload="auto"
+              className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-35 scale-110"
+            />
+            {/* Main video in original uncropped aspect ratio */}
+            <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-8">
+              <video
+                ref={videoRefA2}
+                src={videoA}
+                autoPlay
+                muted
+                loop
+                playsInline
+                webkit-playsinline="true"
+                preload="auto"
+                className="max-h-[90vh] max-w-[95vw] w-auto h-auto object-contain opacity-80"
+                style={{
+                  filter: 'sepia(0.08) saturate(1.05)',
+                  maskImage: 'radial-gradient(ellipse at center, black 65%, transparent 100%)',
+                  WebkitMaskImage: 'radial-gradient(ellipse at center, black 65%, transparent 100%)',
+                }}
+              />
+            </div>
+          </>
         )}
-      </AnimatePresence>
-      <div className="absolute inset-0 bg-ivory/25" />
+      </div>
+
+      {/* DECK B */}
+      <div
+        className="absolute inset-0 transition-opacity duration-[2500ms] ease-in-out"
+        style={{ opacity: deck === 1 ? 1 : 0 }}
+      >
+        {videoB && (
+          <>
+            {/* Ambient background glow matching natural video tones */}
+            <video
+              ref={videoRefB1}
+              src={videoB}
+              autoPlay
+              muted
+              loop
+              playsInline
+              webkit-playsinline="true"
+              preload="auto"
+              className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-35 scale-110"
+            />
+            {/* Main video in original uncropped aspect ratio */}
+            <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-8">
+              <video
+                ref={videoRefB2}
+                src={videoB}
+                autoPlay
+                muted
+                loop
+                playsInline
+                webkit-playsinline="true"
+                preload="auto"
+                className="max-h-[90vh] max-w-[95vw] w-auto h-auto object-contain opacity-80"
+                style={{
+                  filter: 'sepia(0.08) saturate(1.05)',
+                  maskImage: 'radial-gradient(ellipse at center, black 65%, transparent 100%)',
+                  WebkitMaskImage: 'radial-gradient(ellipse at center, black 65%, transparent 100%)',
+                }}
+              />
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Delicate ivory paper tint overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-ivory/70 via-ivory/35 to-ivory/75 backdrop-blur-[0.5px]" />
     </div>
   )
 }
-
