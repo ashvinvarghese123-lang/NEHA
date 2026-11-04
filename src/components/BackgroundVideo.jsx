@@ -32,14 +32,12 @@ export default function BackgroundVideo() {
         if (currentDeck === 0) {
           // Crossfade to Deck B
           setVideoB(nextSrc)
-          // Play deck B videos
           videoRefB1.current?.play().catch(() => {})
           videoRefB2.current?.play().catch(() => {})
           return 1
         } else {
           // Crossfade to Deck A
           setVideoA(nextSrc)
-          // Play deck A videos
           videoRefA1.current?.play().catch(() => {})
           videoRefA2.current?.play().catch(() => {})
           return 0
@@ -75,10 +73,10 @@ export default function BackgroundVideo() {
               playsInline
               webkit-playsinline="true"
               preload="auto"
-              className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-25 scale-110 pointer-events-none"
+              className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-30 scale-110 pointer-events-none"
             />
             {/* 5:7 Aspect Ratio Aesthetic Video Frame */}
-            <div className="relative aspect-[5/7] max-h-[82vh] max-w-[88vw] overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_12px_45px_rgba(73,56,50,0.12)] border border-white/50">
+            <div className="relative aspect-[5/7] max-h-[82vh] max-w-[88vw] overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] shadow-[0_20px_50px_rgba(73,56,50,0.14),0_0_80px_rgba(248,243,234,0.35)] border border-white/60">
               <video
                 ref={videoRefA2}
                 src={videoA}
@@ -90,10 +88,12 @@ export default function BackgroundVideo() {
                 preload="auto"
                 className="h-full w-full object-cover"
                 style={{
-                  filter: 'sepia(0.06) saturate(1.05)',
+                  filter: 'sepia(0.06) saturate(1.06) brightness(0.98)',
                 }}
               />
-              <div className="absolute inset-0 bg-ivory/15 pointer-events-none" />
+              {/* Soft warm film vignette inside the frame */}
+              <div className="absolute inset-0 bg-gradient-to-t from-ivory/25 via-transparent to-ivory/15 pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(73,56,50,0.15)_100%)] pointer-events-none" />
             </div>
           </>
         )}
@@ -116,10 +116,10 @@ export default function BackgroundVideo() {
               playsInline
               webkit-playsinline="true"
               preload="auto"
-              className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-25 scale-110 pointer-events-none"
+              className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-30 scale-110 pointer-events-none"
             />
             {/* 5:7 Aspect Ratio Aesthetic Video Frame */}
-            <div className="relative aspect-[5/7] max-h-[82vh] max-w-[88vw] overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_12px_45px_rgba(73,56,50,0.12)] border border-white/50">
+            <div className="relative aspect-[5/7] max-h-[82vh] max-w-[88vw] overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] shadow-[0_20px_50px_rgba(73,56,50,0.14),0_0_80px_rgba(248,243,234,0.35)] border border-white/60">
               <video
                 ref={videoRefB2}
                 src={videoB}
@@ -131,17 +131,19 @@ export default function BackgroundVideo() {
                 preload="auto"
                 className="h-full w-full object-cover"
                 style={{
-                  filter: 'sepia(0.06) saturate(1.05)',
+                  filter: 'sepia(0.06) saturate(1.06) brightness(0.98)',
                 }}
               />
-              <div className="absolute inset-0 bg-ivory/15 pointer-events-none" />
+              {/* Soft warm film vignette inside the frame */}
+              <div className="absolute inset-0 bg-gradient-to-t from-ivory/25 via-transparent to-ivory/15 pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(73,56,50,0.15)_100%)] pointer-events-none" />
             </div>
           </>
         )}
       </div>
 
       {/* Delicate ivory paper tint overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ivory/50 via-transparent to-ivory/60 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ivory/55 via-ivory/15 to-ivory/65 pointer-events-none" />
     </div>
   )
 }

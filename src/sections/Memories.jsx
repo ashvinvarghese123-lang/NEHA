@@ -4,11 +4,17 @@ import { memories } from '../data/memories'
 
 export default function Memories() {
   return (
-    <section className="mx-auto max-w-5xl px-3 py-16 sm:px-6 sm:py-32">
-      <Reveal as="h2" className="mb-10 text-center text-2xl italic sm:mb-16 sm:text-5xl">
-        our little memories
-      </Reveal>
-      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-2 lg:grid-cols-3 sm:gap-8">
+    <section className="mx-auto max-w-5xl px-3 py-16 sm:px-6 sm:py-28">
+      <div className="text-center mb-8 sm:mb-16">
+        <Reveal as="h2" className="text-2xl font-serif italic text-choc sm:text-5xl">
+          our little memories
+        </Reveal>
+        <Reveal delay={0.2} as="p" className="mt-2 font-hand text-lg text-rose sm:text-2xl">
+          ordinary days that quietly became my happiest ones
+        </Reveal>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3 sm:gap-8">
         {memories.map((m, n) => (
           <Reveal
             key={n}
