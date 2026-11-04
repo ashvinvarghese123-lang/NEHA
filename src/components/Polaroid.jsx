@@ -8,9 +8,11 @@ export default function Polaroid({ src, poster, video, caption, rot = 0, tape, i
       whileHover={{ rotate: 0, scale: 1.03, zIndex: 20 }}
       whileTap={{ scale: 0.98 }}
       style={{ rotate: rot, WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden' }}
-      className={`paper relative w-full max-w-xs p-3 pb-4 select-none ${className}`}
+      className={`paper relative w-full max-w-xs p-1.5 pb-2.5 sm:p-3 sm:pb-4 select-none ${className}`}
     >
-      {tape && <span className="absolute -top-3 left-1/2 h-5 w-20 -translate-x-1/2 -rotate-2 bg-rose/50 shadow-xs sm:h-6 sm:w-24" />}
+      {tape && (
+        <span className="absolute -top-2 left-1/2 h-3.5 w-14 -translate-x-1/2 -rotate-2 bg-rose/50 shadow-xs sm:-top-3 sm:h-6 sm:w-24" />
+      )}
       <div className="aspect-[4/5] overflow-hidden rounded-xs bg-cream">
         {video && src ? (
           <video
@@ -36,14 +38,14 @@ export default function Polaroid({ src, poster, video, caption, rot = 0, tape, i
           />
         ) : (
           <div
-            className="flex h-full w-full items-center justify-center font-hand text-xl text-brown/70"
+            className="flex h-full w-full items-center justify-center font-hand text-xs sm:text-xl text-brown/70"
             style={{ background: tints[idx % 4] }}
           >
             your {video ? 'video' : 'photo'} here
           </div>
         )}
       </div>
-      <figcaption className="mt-2.5 text-center font-hand text-xl text-brown sm:mt-3 sm:text-2xl">
+      <figcaption className="mt-1 text-center font-hand text-xs sm:mt-2.5 sm:text-2xl leading-tight text-brown">
         {caption}
       </figcaption>
     </motion.figure>
