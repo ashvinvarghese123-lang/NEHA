@@ -60,7 +60,7 @@ export default function BackgroundVideo() {
     <div className="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-b from-ivory via-cream to-ivory" aria-hidden>
       {/* DECK A */}
       <div
-        className="absolute inset-0 transition-opacity duration-[2500ms] ease-in-out"
+        className="absolute inset-0 flex items-center justify-center transition-opacity duration-[2200ms] ease-in-out"
         style={{ opacity: deck === 0 ? 1 : 0 }}
       >
         {videoA && (
@@ -75,10 +75,10 @@ export default function BackgroundVideo() {
               playsInline
               webkit-playsinline="true"
               preload="auto"
-              className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-35 scale-110"
+              className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-25 scale-110 pointer-events-none"
             />
-            {/* Main video in original uncropped aspect ratio */}
-            <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-8">
+            {/* 5:7 Aspect Ratio Aesthetic Video Frame */}
+            <div className="relative aspect-[5/7] max-h-[82vh] max-w-[88vw] overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_12px_45px_rgba(73,56,50,0.12)] border border-white/50">
               <video
                 ref={videoRefA2}
                 src={videoA}
@@ -88,13 +88,12 @@ export default function BackgroundVideo() {
                 playsInline
                 webkit-playsinline="true"
                 preload="auto"
-                className="max-h-[90vh] max-w-[95vw] w-auto h-auto object-contain opacity-80"
+                className="h-full w-full object-cover"
                 style={{
-                  filter: 'sepia(0.08) saturate(1.05)',
-                  maskImage: 'radial-gradient(ellipse at center, black 65%, transparent 100%)',
-                  WebkitMaskImage: 'radial-gradient(ellipse at center, black 65%, transparent 100%)',
+                  filter: 'sepia(0.06) saturate(1.05)',
                 }}
               />
+              <div className="absolute inset-0 bg-ivory/15 pointer-events-none" />
             </div>
           </>
         )}
@@ -102,7 +101,7 @@ export default function BackgroundVideo() {
 
       {/* DECK B */}
       <div
-        className="absolute inset-0 transition-opacity duration-[2500ms] ease-in-out"
+        className="absolute inset-0 flex items-center justify-center transition-opacity duration-[2200ms] ease-in-out"
         style={{ opacity: deck === 1 ? 1 : 0 }}
       >
         {videoB && (
@@ -117,10 +116,10 @@ export default function BackgroundVideo() {
               playsInline
               webkit-playsinline="true"
               preload="auto"
-              className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-35 scale-110"
+              className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-25 scale-110 pointer-events-none"
             />
-            {/* Main video in original uncropped aspect ratio */}
-            <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-8">
+            {/* 5:7 Aspect Ratio Aesthetic Video Frame */}
+            <div className="relative aspect-[5/7] max-h-[82vh] max-w-[88vw] overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_12px_45px_rgba(73,56,50,0.12)] border border-white/50">
               <video
                 ref={videoRefB2}
                 src={videoB}
@@ -130,20 +129,19 @@ export default function BackgroundVideo() {
                 playsInline
                 webkit-playsinline="true"
                 preload="auto"
-                className="max-h-[90vh] max-w-[95vw] w-auto h-auto object-contain opacity-80"
+                className="h-full w-full object-cover"
                 style={{
-                  filter: 'sepia(0.08) saturate(1.05)',
-                  maskImage: 'radial-gradient(ellipse at center, black 65%, transparent 100%)',
-                  WebkitMaskImage: 'radial-gradient(ellipse at center, black 65%, transparent 100%)',
+                  filter: 'sepia(0.06) saturate(1.05)',
                 }}
               />
+              <div className="absolute inset-0 bg-ivory/15 pointer-events-none" />
             </div>
           </>
         )}
       </div>
 
       {/* Delicate ivory paper tint overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ivory/70 via-ivory/35 to-ivory/75 backdrop-blur-[0.5px]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ivory/50 via-transparent to-ivory/60 pointer-events-none" />
     </div>
   )
 }
