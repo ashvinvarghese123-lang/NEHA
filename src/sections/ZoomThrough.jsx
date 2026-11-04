@@ -31,7 +31,7 @@ function Layer({ p, i, n, photo }) {
     >
       <div
         style={{ transform: `translate3d(${x}vw, ${y}vh, 0)` }}
-        className="pointer-events-auto w-[64vw] max-w-[260px] sm:w-72 sm:max-w-xs shadow-[0_25px_50px_-12px_rgba(73,56,50,0.25)] rounded-xs"
+        className="pointer-events-auto w-[64vw] max-w-[260px] sm:w-72 sm:max-w-xs"
       >
         <Polaroid {...photo} idx={i} eager />
       </div>
@@ -64,9 +64,9 @@ export default function ZoomThrough() {
       <div className="sticky top-0 h-screen h-[100dvh] overflow-hidden">
         <motion.p
           style={{ opacity: hint }}
-          className="pointer-events-none absolute bottom-8 left-0 right-0 z-20 px-4 text-center font-hand text-xl text-choc/85 sm:bottom-10 sm:text-2xl drop-shadow-[0_1px_6px_rgba(248,243,234,0.95)]"
+          className="pointer-events-none absolute bottom-8 left-0 right-0 z-20 px-4 text-center font-hand text-xl text-brown sm:bottom-10 sm:text-2xl"
         >
-          keep scrolling, fly through our moments ↓
+          keep scrolling, fly through us ↓
         </motion.p>
         {zoomPhotos.map((ph, i) => (
           <Layer key={i} p={p} i={i} n={n} photo={ph} />

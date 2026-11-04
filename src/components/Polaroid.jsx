@@ -5,18 +5,15 @@ const tints = ['#E9D5CB', '#DCC3B9', '#EADFCF', '#D9A9A9']
 export default function Polaroid({ src, poster, video, caption, rot = 0, tape, idx = 0, className = '', eager = false }) {
   return (
     <motion.figure
-      whileHover={{ rotate: 0, scale: 1.035, zIndex: 25 }}
+      whileHover={{ rotate: 0, scale: 1.03, zIndex: 20 }}
       whileTap={{ scale: 0.98 }}
       style={{ rotate: rot, WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden' }}
-      className={`paper relative w-full max-w-xs p-2 pb-3.5 sm:p-3.5 sm:pb-5 select-none transition-shadow duration-300 hover:shadow-[0_16px_35px_-5px_rgba(73,56,50,0.2)] ${className}`}
+      className={`paper relative w-full max-w-xs p-1.5 pb-2.5 sm:p-3 sm:pb-4 select-none ${className}`}
     >
       {tape && (
-        <span
-          className="absolute -top-2.5 left-1/2 h-3.5 w-14 -translate-x-1/2 -rotate-2 rounded-xs bg-gradient-to-r from-rose/40 via-rose/55 to-rose/40 border border-white/40 shadow-xs sm:-top-3 sm:h-5 sm:w-22"
-          style={{ backdropFilter: 'blur(2px)' }}
-        />
+        <span className="absolute -top-2 left-1/2 h-3.5 w-14 -translate-x-1/2 -rotate-2 bg-rose/50 shadow-xs sm:-top-3 sm:h-6 sm:w-24" />
       )}
-      <div className="aspect-[4/5] overflow-hidden rounded-xs bg-cream shadow-inner">
+      <div className="aspect-[4/5] overflow-hidden rounded-xs bg-cream">
         {video && src ? (
           <video
             src={src}
@@ -36,7 +33,7 @@ export default function Polaroid({ src, poster, video, caption, rot = 0, tape, i
             loading={eager ? 'eager' : 'lazy'}
             decoding={eager ? 'sync' : 'async'}
             draggable="false"
-            className="pointer-events-none h-full w-full select-none object-cover transition-transform duration-[3000ms] ease-out hover:scale-105"
+            className="pointer-events-none h-full w-full select-none object-cover transition-transform duration-[4000ms] hover:scale-105"
             style={{ WebkitTouchCallout: 'none' }}
           />
         ) : (
@@ -48,7 +45,7 @@ export default function Polaroid({ src, poster, video, caption, rot = 0, tape, i
           </div>
         )}
       </div>
-      <figcaption className="mt-1.5 text-center font-hand text-sm sm:mt-2.5 sm:text-2xl leading-tight text-choc/85 tracking-wide">
+      <figcaption className="mt-1 text-center font-hand text-xs sm:mt-2.5 sm:text-2xl leading-tight text-brown">
         {caption}
       </figcaption>
     </motion.figure>
