@@ -1,23 +1,20 @@
-@tailwind base; @tailwind components; @tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  -webkit-overflow-scrolling: touch;
 }
 
 html, body {
-  overflow-x: clip;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
   @apply bg-ivory text-choc font-serif antialiased;
-  touch-action: manipulation;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   * { animation-duration: .01ms !important; }
 }
 

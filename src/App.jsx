@@ -34,7 +34,7 @@ export default function App() {
       <Cursor />
       <MusicPlayer />
       <div className="grain" aria-hidden />
-      <main className="relative z-10">
+      <main className="relative z-10 overflow-x-clip">
         <Hero />
         <AboutHer />
         <Memories />

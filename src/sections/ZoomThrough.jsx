@@ -7,14 +7,14 @@ import { zoomPhotos } from '../data/memories'
 const spots = [[0, 0], [-10, -6], [10, 5], [-8, 7], [8, -7], [0, 3]]
 
 function Layer({ p, i, n, photo }) {
-  const total = n + 1
+  const total = n
   const start = i / total
-  const end = (i + 2) / total
+  const end = Math.min(1, (i + 1.35) / total)
   const w = end - start
-  const scale = useTransform(p, [start, end], [0.32, 3.6])
+  const scale = useTransform(p, [start, end], [0.32, 3.4])
   const opacity = useTransform(
     p,
-    [start, start + w * 0.25, start + w * 0.7, end],
+    [start, start + w * 0.22, start + w * 0.75, end],
     i === 0 ? [1, 1, 1, 0] : [0, 1, 1, 0]
   )
   const [x, y] = spots[i % spots.length]
@@ -31,7 +31,7 @@ function Layer({ p, i, n, photo }) {
     >
       <div
         style={{ transform: `translate3d(${x}vw, ${y}vh, 0)` }}
-        className="pointer-events-auto w-[64vw] max-w-[260px] sm:w-72 sm:max-w-xs"
+        className="pointer-events-none w-[64vw] max-w-[260px] sm:w-72 sm:max-w-xs"
       >
         <Polaroid {...photo} idx={i} eager />
       </div>
@@ -44,7 +44,7 @@ export default function ZoomThrough() {
   const reduce = useReducedMotion()
   const n = zoomPhotos?.length || 0
   const { scrollYProgress: rawP } = useScroll({ target: ref, offset: ['start start', 'end end'] })
-  const p = useSpring(rawP, { damping: 28, stiffness: 130, mass: 0.12 })
+  const p = useSpring(rawP, { damping: 30, stiffness: 200, mass: 0.08 })
   const hint = useTransform(p, [0, 0.08], [1, 0])
 
   if (!n) return null
@@ -60,7 +60,7 @@ export default function ZoomThrough() {
   }
 
   return (
-    <section ref={ref} className="relative" style={{ height: `${(n + 1) * 100}dvh` }}>
+    <section ref={ref} className="relative" style={{ height: `${Math.max(260, n * 65)}dvh` }}>
       <div className="sticky top-0 h-screen h-[100dvh] overflow-hidden">
         <motion.p
           style={{ opacity: hint }}

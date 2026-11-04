@@ -34,7 +34,7 @@ export default function FutureLetter() {
   })
 
   return (
-    <section id="future-letter" className="mx-auto max-w-2xl px-4 pb-28 pt-16 text-center sm:px-6 sm:pb-40 sm:pt-24">
+    <section id="future-letter" className="mx-auto max-w-2xl px-4 pb-28 pt-16 text-center sm:px-6 sm:pb-40 sm:pt-24 overflow-hidden">
       <Reveal as="h2" className="mb-8 font-hand text-2xl text-brown sm:mb-12 sm:text-3xl">
         a letter for later
       </Reveal>

@@ -17,7 +17,7 @@ export default function ReasonsJar() {
   }
 
   return (
-    <section className="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6 sm:py-28">
+    <section className="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6 sm:py-28 overflow-hidden">
       <Reveal as="h2" className="text-2xl italic sm:text-5xl">a little jar of reasons</Reveal>
       <Reveal as="p" delay={0.2} className="mt-3 font-hand text-xl text-brown sm:text-2xl">
         for all the days you need a gentle reminder of how loved you are, Neha
@@ -31,7 +31,7 @@ export default function ReasonsJar() {
           whileTap={{ scale: 0.94 }}
           animate={isShaking ? { rotate: [-4, 4, -4, 4, 0], y: [-4, 2, -3, 1, 0] } : {}}
           transition={{ duration: 0.4 }}
-          className="group relative cursor-pointer focus:outline-none"
+          className="group relative cursor-pointer focus:outline-none [touch-action:manipulation]"
           aria-label="Tap the jar to pull a reason"
         >
           {/* Jar graphic */}

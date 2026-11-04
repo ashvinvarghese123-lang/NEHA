@@ -40,7 +40,7 @@ export default function LoveLetter() {
   }
 
   return (
-    <section className="mx-auto max-w-2xl px-4 py-20 sm:px-6 sm:py-32">
+    <section className="mx-auto max-w-2xl px-4 py-20 sm:px-6 sm:py-32 overflow-hidden">
       <Reveal className="mb-12 sm:mb-16"><Envelope open={open} onOpen={() => setOpen(true)} /></Reveal>
       <AnimatePresence>
         {open && (

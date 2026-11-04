@@ -3,7 +3,7 @@ import { littleThings } from '../data/memories'
 
 export default function LittleThings() {
   return (
-    <section className="mx-auto max-w-3xl space-y-12 px-4 py-20 sm:space-y-20 sm:px-6 sm:py-32">
+    <section className="mx-auto max-w-3xl space-y-12 px-4 py-20 sm:space-y-20 sm:px-6 sm:py-32 overflow-hidden">
       <Reveal as="h2" className="text-center font-hand text-2xl text-brown sm:text-3xl">
         things I never get tired of
       </Reveal>
