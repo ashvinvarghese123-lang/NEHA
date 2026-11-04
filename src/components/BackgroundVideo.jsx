@@ -53,7 +53,7 @@ export default function BackgroundVideo() {
       {/* DECK A */}
       <div
         className="absolute inset-0 transition-opacity duration-[2500ms] ease-in-out"
-        style={{ opacity: deck === 0 ? 1 : 0 }}
+        style={{ opacity: deck === 0 ? 0.72 : 0 }}
       >
         {videoA && (
           <video
@@ -75,7 +75,7 @@ export default function BackgroundVideo() {
       {/* DECK B */}
       <div
         className="absolute inset-0 transition-opacity duration-[2500ms] ease-in-out"
-        style={{ opacity: deck === 1 ? 1 : 0 }}
+        style={{ opacity: deck === 1 ? 0.72 : 0 }}
       >
         {videoB && (
           <video
